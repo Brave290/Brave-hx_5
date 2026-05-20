@@ -1,463 +1,1374 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brave-hx | Creative Graphics Design Agency – Bold Brand Design</title>
-    <meta name="description" content="Brave-hx is a creative graphics design agency specializing in brand identity, logo design, UI/UX, social media, and motion graphics. We craft bold brands that stand out.">
-    <meta property="og:title" content="Brave-hx | Creative Graphics Design Agency">
-    <meta property="og:description" content="We design bold brands that stand out. From logos to full brand identity, we create visual experiences that captivate.">
-    <meta property="og:image" content="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/13e194f57-b360-4926-b107-98c30b4a94ad.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif']
-                    }
-                }
-            }
-        }
-        (function() {
-            const saved = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', saved);
-        })();
-    </script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.4s, color 0.4s; }
-        :root, [data-theme="light"] {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-tertiary: #f1f3f5;
-            --bg-card: #ffffff;
-            --text-primary: #1a1a2e;
-            --text-secondary: #495057;
-            --text-tertiary: #868e96;
-            --border-color: #e9ecef;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --accent-light: #dbeafe;
-            --accent-secondary: #f97316;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-            --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
-            --nav-bg: rgba(255,255,255,0.95);
-            --input-bg: #f8f9fa;
-            --footer-bg: #1a1a2e;
-            --footer-text: #adb5bd;
-        }
-        [data-theme="dark"] {
-            --bg-primary: #0f1117;
-            --bg-secondary: #161922;
-            --bg-tertiary: #1c2030;
-            --bg-card: #1a1e2e;
-            --text-primary: #f1f3f5;
-            --text-secondary: #adb5bd;
-            --text-tertiary: #6c757d;
-            --border-color: #2a2e3d;
-            --accent: #3b82f6;
-            --accent-hover: #60a5fa;
-            --accent-light: rgba(59,130,246,0.15);
-            --accent-secondary: #fb923c;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
-            --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
-            --nav-bg: rgba(15,17,23,0.95);
-            --input-bg: #1c2030;
-            --footer-bg: #0a0c12;
-            --footer-text: #6c757d;
-        }
-        body { background-color: var(--bg-primary); color: var(--text-primary); }
-        .nav-link { position: relative; color: var(--text-secondary); transition: color 0.3s; font-weight: 500; }
-        .nav-link:hover, .nav-link.active { color: var(--accent); }
-        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; border-radius: 1px; }
-        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-        .btn-primary-custom { background: var(--accent); color: #fff; transition: all 0.3s; font-weight: 600; }
-        .btn-primary-custom:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,99,235,0.3); }
-        .btn-outline-custom { border: 2px solid var(--accent); color: var(--accent); transition: all 0.3s; font-weight: 600; }
-        .btn-outline-custom:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
-        .card-custom { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; transition: all 0.4s; box-shadow: var(--shadow-sm); }
-        .card-custom:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-        .page { display: none; opacity: 0; transition: opacity 0.4s ease; }
-        .page.active { display: block; opacity: 1; }
-        .theme-toggle { width: 48px; height: 26px; border-radius: 13px; background: var(--bg-tertiary); border: 2px solid var(--border-color); cursor: pointer; position: relative; transition: all 0.3s; }
-        .theme-toggle::after { content: ''; position: absolute; top: 1px; left: 1px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); transition: transform 0.3s; }
-        [data-theme="dark"] .theme-toggle::after { transform: translateX(20px); }
-        .theme-toggle .sun-icon, .theme-toggle .moon-icon { position: absolute; top: 50%; transform: translateY(-50%); font-size: 12px; transition: opacity 0.3s; pointer-events: none; }
-        .theme-toggle .sun-icon { left: 4px; opacity: 1; }
-        .theme-toggle .moon-icon { right: 4px; opacity: 0; }
-        [data-theme="dark"] .theme-toggle .sun-icon { opacity: 0; }
-        [data-theme="dark"] .theme-toggle .moon-icon { opacity: 1; }
-        .hero-section { min-height: 90vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 80px; }
-        .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--accent-light) 100%); }
-        .hero-pattern { position: absolute; inset: 0; opacity: 0.03; background-image: radial-gradient(circle, var(--text-primary) 1px, transparent 1px); background-size: 24px 24px; }
-        .portfolio-card { overflow: hidden; border-radius: 16px; position: relative; cursor: pointer; }
-        .portfolio-card img { transition: transform 0.6s ease; }
-        .portfolio-card:hover img { transform: scale(1.06); }
-        .portfolio-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%); opacity: 0; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 20px; }
-        .portfolio-card:hover .portfolio-overlay { opacity: 1; }
-        .service-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; background: var(--accent-light); }
-        .mobile-menu { transform: translateX(100%); transition: transform 0.4s ease; }
-        .mobile-menu.open { transform: translateX(0); }
-        .whatsapp-float { position: fixed; bottom: 24px; right: 24px; z-index: 1000; animation: floatBounce 3s ease-in-out infinite; }
-        @keyframes floatBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent) !important; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
-        .page-header { padding: 100px 0 40px; background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); }
-        .ceo-quote { font-family: 'Playfair Display', serif; line-height: 1.4; }
-        #scrollToTop { position: fixed; bottom: 80px; right: 24px; z-index: 999; opacity: 0; transition: opacity 0.3s; }
-        #scrollToTop.show { opacity: 1; }
-        @media (max-width: 768px) {
-            .hero-section { min-height: auto; padding-top: 70px; padding-bottom: 40px; }
-            .page-header { padding: 80px 0 30px; }
-        }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JAMIUGLOBALTECH — World-Class Design Studio</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M25 20 Q28 18 32 22 Q36 28 34 35 Q32 42 28 50 Q22 62 25 72 Q28 80 35 82' stroke='%23C8A961' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3Cpath d='M52 18 Q55 16 58 20 Q62 26 60 34 Q58 42 56 48 Q54 58 55 68 Q57 76 64 78' stroke='%23C8A961' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='68' cy='65' r='12' stroke='%23C8A961' stroke-width='6' fill='none'/%3E%3C/svg%3E">
+  <link href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-300.woff2" rel="preload" as="font" type="font/woff2" crossorigin>
+  <style>
+    @import url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/index.min.css');
+    @import url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.12/index.min.css');
+    @import url('https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5.0.8/index.min.css');
+    @import url('https://cdn.jsdelivr.net/npm/@fontsource/cinzel@5.0.12/index.min.css');
+
+    :root {
+      --bg: #07080c;
+      --bg2: #0d0f16;
+      --bg3: #141722;
+      --card: #111420;
+      --card2: #181c2e;
+      --card-hover: #1e2338;
+      --border: rgba(200,169,97,0.12);
+      --border-light: rgba(255,255,255,0.06);
+      --text: #f4f4f8;
+      --text2: #c8c8d8;
+      --muted: #6b6b80;
+      --accent: #C8A961;
+      --accent2: #E8C971;
+      --accent-dark: #A8893D;
+      --accent-grad: linear-gradient(135deg, #C8A961, #E8C971);
+      --accent-grad2: linear-gradient(135deg, #A8893D, #C8A961);
+      --green: #34d399;
+      --red: #f87171;
+      --navy: #1a1f3a;
+      --glow: 0 0 40px rgba(200,169,97,0.15);
+      --shadow-lg: 0 25px 60px rgba(0,0,0,0.4);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-lg: 24px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --bg: #faf9f6;
+      --bg2: #f0efe8;
+      --bg3: #e8e6dd;
+      --card: #ffffff;
+      --card2: #f8f7f2;
+      --card-hover: #f0efe8;
+      --border: rgba(200,169,97,0.2);
+      --border-light: rgba(0,0,0,0.06);
+      --text: #1a1a2e;
+      --text2: #3a3a50;
+      --muted: #7a7a90;
+      --shadow-lg: 0 25px 60px rgba(0,0,0,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: background 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; line-height: 1.2; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ── PRELOADER ── */
+    #preloader {
+      position: fixed; inset: 0; z-index: 100000;
+      background: var(--bg); display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .preloader-logo svg { width: 90px; height: 90px; }
+    .preloader-logo path, .preloader-logo circle {
+      stroke-dasharray: 300; stroke-dashoffset: 300;
+      animation: drawStroke 2s ease forwards;
+    }
+    .preloader-logo circle { animation-delay: 0.4s; }
+    @keyframes drawStroke { to { stroke-dashoffset: 0; } }
+    .preloader-text {
+      margin-top: 1.2rem; font-family: 'Cinzel', serif; letter-spacing: 6px;
+      color: var(--accent); font-size: 0.85rem; animation: fadeInPulse 2s infinite alternate;
+    }
+    @keyframes fadeInPulse { 0% { opacity: 0.3; } 100% { opacity: 1; } }
+    .preloader-progress { margin-top: 1.5rem; width: 180px; height: 2px; background: var(--border-light); border-radius: 2px; overflow: hidden; }
+    .preloader-bar { height: 100%; background: var(--accent-grad); width: 0; animation: loadProgress 1.8s ease forwards; }
+    @keyframes loadProgress { to { width: 100%; } }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
+      padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;
+      transition: var(--transition);
+      background: transparent;
+    }
+    .navbar.scrolled {
+      background: rgba(7,8,12,0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 0.7rem 2rem;
+    }
+    [data-theme="light"] .navbar.scrolled {
+      background: rgba(250,249,246,0.9);
+    }
+    .nav-brand {
+      font-family: 'Cinzel', serif; font-size: 1.1rem; letter-spacing: 3px;
+      color: var(--accent); font-weight: 600;
+    }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-link {
+      font-size: 0.85rem; font-weight: 500; color: var(--text2);
+      transition: var(--transition); position: relative; letter-spacing: 0.5px;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0;
+      height: 1.5px; background: var(--accent); transition: width 0.3s ease;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--accent); }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-actions { display: flex; gap: 0.8rem; align-items: center; }
+    .nav-btn {
+      width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03); display: flex; align-items: center;
+      justify-content: center; cursor: pointer; color: var(--text); transition: var(--transition);
+    }
+    .nav-btn:hover { background: rgba(200,169,97,0.1); border-color: var(--accent); }
+    .nav-cta {
+      padding: 0.5rem 1.2rem; border-radius: 50px; background: var(--accent-grad);
+      color: #0a0a0a; font-weight: 600; font-size: 0.8rem; border: none;
+      cursor: pointer; transition: var(--transition); letter-spacing: 0.5px;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(200,169,97,0.3); }
+    .mobile-menu-btn { display: none; }
+
+    /* ── PAGES ── */
+    .page { display: none; opacity: 0; transition: opacity 0.4s ease; }
+    .page.active { display: block; opacity: 1; }
+
+    /* ── HERO ── */
+    .hero-section {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 8rem 2rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero-bg-gradient {
+      position: absolute; top: -50%; right: -30%; width: 80%; height: 150%;
+      background: radial-gradient(ellipse, rgba(200,169,97,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-bg-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(var(--border-light) 1px, transparent 1px),
+                         linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+      background-size: 80px 80px; opacity: 0.5; pointer-events: none;
+    }
+    .hero-content { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid var(--border); border-radius: 50px;
+      padding: 8px 20px; font-size: 0.8rem; color: var(--text2);
+      margin-bottom: 2rem; backdrop-filter: blur(10px);
+      background: rgba(200,169,97,0.05);
+    }
+    .hero-badge-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+      animation: dotPulse 2s infinite;
+    }
+    @keyframes dotPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+    .hero-title {
+      font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700;
+      line-height: 1.05; margin-bottom: 1.5rem; letter-spacing: -1px;
+    }
+    .hero-title .accent { color: var(--accent); }
+    .hero-title .outline-text {
+      -webkit-text-stroke: 1.5px var(--text);
+      color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 1.15rem; color: var(--muted); max-width: 550px;
+      margin-bottom: 2.5rem; line-height: 1.8;
+    }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem; }
+    .btn-gold {
+      padding: 0.9rem 2.2rem; border-radius: 50px; background: var(--accent-grad);
+      color: #0a0a0a; font-weight: 700; font-size: 0.9rem; border: none;
+      cursor: pointer; transition: var(--transition); display: inline-flex;
+      align-items: center; gap: 8px; letter-spacing: 0.5px;
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,169,97,0.3); }
+    .btn-ghost {
+      padding: 0.9rem 2.2rem; border-radius: 50px; background: transparent;
+      border: 1px solid var(--border); color: var(--text); font-weight: 600;
+      font-size: 0.9rem; cursor: pointer; transition: var(--transition);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,169,97,0.05); }
+    .hero-stats { display: flex; gap: 3rem; flex-wrap: wrap; }
+    .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: var(--accent); }
+    .hero-stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.5px; }
+
+    /* ── MARQUEE ── */
+    .marquee-section {
+      overflow: hidden; padding: 2rem 0;
+      border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);
+    }
+    .marquee-track {
+      display: flex; gap: 3rem; animation: marqueeScroll 30s linear infinite;
+      width: max-content;
+    }
+    @keyframes marqueeScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .marquee-item {
+      display: flex; align-items: center; gap: 0.8rem;
+      font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 500;
+      color: var(--muted); white-space: nowrap; opacity: 0.7;
+    }
+    .marquee-item span { font-size: 1.4rem; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag {
+      font-size: 0.7rem; letter-spacing: 4px; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 1rem; font-weight: 600;
+    }
+    .section-heading {
+      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .section-desc { color: var(--muted); max-width: 600px; margin-bottom: 3rem; font-size: 1rem; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-image-wrap { position: relative; }
+    .about-image {
+      width: 100%; aspect-ratio: 4/5; border-radius: var(--radius-lg);
+      overflow: hidden; position: relative;
+      border: 1px solid var(--border);
+    }
+    .about-image img { width: 100%; height: 100%; object-fit: cover; }
+    .about-image-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(7,8,12,0.8), transparent 50%);
+    }
+    .about-float-card {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.2rem 1.5rem;
+      backdrop-filter: blur(20px); box-shadow: var(--shadow-lg);
+    }
+    .about-float-card .num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--accent); font-weight: 700; }
+    .about-float-card .lbl { font-size: 0.75rem; color: var(--muted); }
+    .about-text h2 { margin-bottom: 1.5rem; }
+    .about-text p { color: var(--muted); line-height: 1.9; margin-bottom: 1.5rem; }
+    .about-highlights { display: flex; flex-direction: column; gap: 0.8rem; margin: 2rem 0; }
+    .about-highlight {
+      display: flex; align-items: center; gap: 0.8rem;
+      font-size: 0.9rem; color: var(--text2);
+    }
+    .about-highlight-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(200,169,97,0.1); display: flex;
+      align-items: center; justify-content: center; font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    /* ── SERVICES ── */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .service-card {
+      background: var(--card); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 2.5rem 2rem;
+      transition: var(--transition); position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--accent-grad); opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .service-card:hover { border-color: var(--border); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon-wrap {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: rgba(200,169,97,0.08); border: 1px solid rgba(200,169,97,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1.5rem;
+    }
+    .service-card h3 { font-size: 1.2rem; margin-bottom: 0.8rem; }
+    .service-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+    .service-card .service-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 1.2rem; font-size: 0.82rem; color: var(--accent);
+      font-weight: 600; transition: var(--transition);
+    }
+    .service-card .service-link:hover { gap: 10px; }
+
+    /* ── PORTFOLIO GRID ── */
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .portfolio-item {
+      position: relative; border-radius: var(--radius-lg); overflow: hidden;
+      aspect-ratio: 4/3; cursor: pointer; border: 1px solid var(--border-light);
+      background: var(--card);
+    }
+    .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .portfolio-item:hover img { transform: scale(1.05); }
+    .portfolio-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(7,8,12,0.9) 0%, transparent 60%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 2rem; opacity: 0; transition: opacity 0.3s ease;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-overlay h4 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+    .portfolio-overlay p { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── PROCESS ── */
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+    .process-step { text-align: center; padding: 2rem 1.5rem; }
+    .process-num {
+      font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700;
+      color: rgba(200,169,97,0.2); margin-bottom: 1rem;
+    }
+    .process-step h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .process-step p { font-size: 0.85rem; color: var(--muted); }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .testimonial-card {
+      background: var(--card); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 2rem; transition: var(--transition);
+    }
+    .testimonial-card:hover { border-color: var(--border); }
+    .testimonial-stars { color: var(--accent); margin-bottom: 1rem; letter-spacing: 2px; }
+    .testimonial-text { font-size: 0.92rem; color: var(--text2); font-style: italic; line-height: 1.8; margin-bottom: 1.5rem; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+    .testimonial-avatar {
+      width: 44px; height: 44px; border-radius: 50%; background: var(--accent-grad);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #0a0a0a; font-size: 0.85rem;
+    }
+    .testimonial-name { font-weight: 600; font-size: 0.9rem; }
+    .testimonial-role { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+    .contact-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.5rem; background: var(--card); border: 1px solid var(--border-light);
+      border-radius: var(--radius); transition: var(--transition);
+    }
+    .contact-item:hover { border-color: var(--border); }
+    .contact-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(200,169,97,0.08); border: 1px solid rgba(200,169,97,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .contact-item h4 { font-size: 0.95rem; margin-bottom: 0.3rem; font-family: 'Inter', sans-serif; }
+    .contact-item p { font-size: 0.85rem; color: var(--muted); }
+    .contact-form-wrap {
+      background: var(--card); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 2.5rem;
+    }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.85rem; }
+    .form-input, .form-textarea, .form-select {
+      width: 100%; padding: 0.9rem 1.2rem; border-radius: var(--radius-sm);
+      background: var(--bg2); border: 1px solid var(--border-light);
+      color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.9rem;
+      outline: none; transition: var(--transition);
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--accent); }
+    .form-input.error, .form-textarea.error { border-color: var(--red); }
+    .error-msg { color: var(--red); font-size: 0.75rem; display: none; margin-top: 0.3rem; }
+    .error-msg.show { display: block; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* ── PRICING ── */
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .pricing-card {
+      background: var(--card); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 2.5rem; position: relative;
+      transition: var(--transition);
+    }
+    .pricing-card.featured {
+      border-color: var(--accent);
+      background: linear-gradient(145deg, var(--card), rgba(200,169,97,0.03));
+    }
+    .pricing-card.featured::before {
+      content: 'POPULAR'; position: absolute; top: 1.2rem; right: 1.2rem;
+      background: var(--accent-grad); color: #0a0a0a; padding: 4px 12px;
+      border-radius: 50px; font-size: 0.65rem; font-weight: 700; letter-spacing: 1px;
+    }
+    .pricing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .pricing-name { font-size: 0.8rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .pricing-price { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .pricing-price span { font-size: 0.9rem; color: var(--muted); font-family: 'Inter', sans-serif; }
+    .pricing-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .pricing-features { list-style: none; margin-bottom: 2rem; }
+    .pricing-features li {
+      padding: 0.5rem 0; font-size: 0.85rem; color: var(--text2);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .pricing-features li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+    .pricing-btn {
+      width: 100%; padding: 0.9rem; border-radius: 50px; font-weight: 600;
+      font-size: 0.85rem; cursor: pointer; transition: var(--transition); text-align: center;
+    }
+
+    /* ── BLOG ── */
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .blog-card {
+      background: var(--card); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition);
+    }
+    .blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .blog-img { width: 100%; height: 200px; background: var(--bg3); overflow: hidden; }
+    .blog-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .blog-card:hover .blog-img img { transform: scale(1.05); }
+    .blog-content { padding: 1.5rem 2rem 2rem; }
+    .blog-tag { font-size: 0.7rem; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .blog-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .blog-card p { font-size: 0.85rem; color: var(--muted); }
+    .blog-meta { display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.75rem; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      padding: 4rem 2rem 2rem; border-top: 1px solid var(--border-light);
+      background: var(--bg2);
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto; }
+    .footer-brand { font-family: 'Cinzel', serif; font-size: 1.1rem; letter-spacing: 3px; color: var(--accent); margin-bottom: 1rem; }
+    .footer-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; max-width: 300px; }
+    .footer-heading { font-size: 0.8rem; letter-spacing: 2px; color: var(--text); text-transform: uppercase; margin-bottom: 1rem; font-family: 'Inter', sans-serif; font-weight: 600; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links li a { font-size: 0.85rem; color: var(--muted); transition: var(--transition); }
+    .footer-links li a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem;
+      border-top: 1px solid var(--border-light);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem; color: var(--muted);
+    }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 5000;
+      background: rgba(7,8,12,0.95); backdrop-filter: blur(20px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 2rem; opacity: 0; visibility: hidden; transition: var(--transition);
+    }
+    .mobile-menu.open { opacity: 1; visibility: visible; }
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700;
+      color: var(--text); transition: var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-menu-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border);
+      background: none; color: var(--text); font-size: 1.5rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── SUPPORT POPUP ── */
+    .support-overlay {
+      display: none; position: fixed; inset: 0; z-index: 8000;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+      align-items: center; justify-content: center;
+    }
+    .support-overlay.open { display: flex; }
+    .support-popup {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 2.5rem;
+      width: 90%; max-width: 380px; position: relative;
+      animation: popUp 0.3s ease;
+    }
+    @keyframes popUp { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .support-popup h3 { margin-bottom: 0.5rem; }
+    .support-popup > p { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .support-link {
+      display: flex; align-items: center; gap: 1rem; padding: 1rem;
+      border-radius: var(--radius-sm); border: 1px solid var(--border-light);
+      margin-bottom: 0.8rem; transition: var(--transition);
+    }
+    .support-link:hover { border-color: var(--border); background: var(--bg3); }
+    .support-link-icon { font-size: 1.3rem; }
+    .support-link strong { display: block; font-size: 0.9rem; }
+    .support-link small { color: var(--muted); font-size: 0.75rem; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+      padding: 1rem 2rem; border-radius: 50px; background: var(--card);
+      border: 1px solid var(--border); color: var(--text);
+      font-weight: 600; font-size: 0.85rem; z-index: 9999;
+      opacity: 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-lg);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast.error { border-color: var(--red); }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      text-align: center; padding: 6rem 2rem;
+      background: linear-gradient(180deg, transparent, rgba(200,169,97,0.03), transparent);
+    }
+    .cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+    /* ── ANIMATIONS ── */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 2rem; }
+    }
+    @media (max-width: 600px) {
+      .hero-section { padding: 7rem 1.2rem 3rem; }
+      .section { padding: 4rem 1.2rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation (compact) -->
-    <nav id="navbar" style="background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color);" class="fixed top-0 left-0 right-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="#" onclick="navigateTo('home')" class="flex items-center gap-2 group" aria-label="Brave-hx Home">
-                <div style="background: var(--accent);" class="w-9 h-9 rounded-lg flex items-center justify-center font-serif font-bold text-lg text-white">B</div>
-                <span class="font-serif font-bold text-lg" style="color: var(--text-primary);">Brave<span style="color: var(--accent);">-hx</span></span>
-            </a>
-            <div class="hidden lg:flex items-center gap-6">
-                <a href="#" onclick="navigateTo('home')" class="nav-link active text-sm" data-page="home">Home</a>
-                <a href="#" onclick="navigateTo('about')" class="nav-link text-sm" data-page="about">About</a>
-                <a href="#" onclick="navigateTo('services')" class="nav-link text-sm" data-page="services">Services</a>
-                <a href="#" onclick="navigateTo('portfolio')" class="nav-link text-sm" data-page="portfolio">Portfolio</a>
-                <a href="#" onclick="navigateTo('contact')" class="nav-link text-sm" data-page="contact">Contact</a>
-            </div>
-            <div class="flex items-center gap-3">
-                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle dark mode">
-                    <span class="sun-icon">☀️</span>
-                    <span class="moon-icon">🌙</span>
-                </button>
-                <a href="#" onclick="navigateTo('contact')" class="btn-primary-custom hidden md:inline-flex px-5 py-2 rounded-full text-sm">Get a Quote</a>
-                <button id="menuBtn" class="lg:hidden w-8 h-8 flex flex-col justify-center gap-1" onclick="toggleMenu()" aria-label="Menu">
-                    <span class="w-5 h-0.5" style="background: var(--text-primary);"></span>
-                    <span class="w-5 h-0.5" style="background: var(--text-primary);"></span>
-                    <span class="w-5 h-0.5" style="background: var(--text-primary);"></span>
-                </button>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-72 h-full z-50 p-6 flex flex-col gap-6 shadow-2xl" style="background: var(--bg-primary);">
-        <button onclick="toggleMenu()" class="self-end text-2xl" style="color: var(--text-secondary);">&times;</button>
-        <div class="flex flex-col gap-2 mt-8">
-            <a href="#" onclick="navigateTo('home'); toggleMenu();" class="text-lg font-medium py-2 px-3 rounded-lg" style="color: var(--text-secondary);">Home</a>
-            <a href="#" onclick="navigateTo('about'); toggleMenu();" class="text-lg font-medium py-2 px-3 rounded-lg" style="color: var(--text-secondary);">About</a>
-            <a href="#" onclick="navigateTo('services'); toggleMenu();" class="text-lg font-medium py-2 px-3 rounded-lg" style="color: var(--text-secondary);">Services</a>
-            <a href="#" onclick="navigateTo('portfolio'); toggleMenu();" class="text-lg font-medium py-2 px-3 rounded-lg" style="color: var(--text-secondary);">Portfolio</a>
-            <a href="#" onclick="navigateTo('contact'); toggleMenu();" class="text-lg font-medium py-2 px-3 rounded-lg" style="color: var(--text-secondary);">Contact</a>
-        </div>
-        <a href="#" onclick="navigateTo('contact'); toggleMenu();" class="btn-primary-custom px-5 py-2.5 rounded-full text-sm text-center mt-4">Get a Quote</a>
-        <div class="mt-auto text-sm" style="color: var(--text-tertiary);">info.bravehx@gmail.com<br>+234 915 118 6880</div>
-    </div>
-    <div id="menuOverlay" class="fixed inset-0 bg-black/50 z-40 hidden" onclick="toggleMenu()"></div>
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="preloader-logo">
+    <svg viewBox="0 0 100 100">
+      <path d="M25 20 Q28 18 32 22 Q36 28 34 35 Q32 42 28 50 Q22 62 25 72 Q28 80 35 82" stroke="var(--accent)" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M52 18 Q55 16 58 20 Q62 26 60 34 Q58 42 56 48 Q54 58 55 68 Q57 76 64 78" stroke="var(--accent)" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <circle cx="68" cy="65" r="12" stroke="var(--accent)" stroke-width="5" fill="none"/>
+    </svg>
+  </div>
+  <div class="preloader-text">JAMIUGLOBALTECH</div>
+  <div class="preloader-progress"><div class="preloader-bar"></div></div>
+</div>
 
-    <!-- Scroll to Top Button -->
-    <button id="scrollToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center shadow-md" style="background: var(--accent);" title="Back to top">↑</button>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-brand" onclick="navigate('home')">JAMIUGLOBALTECH</a>
+  <div class="nav-links">
+    <a href="#" class="nav-link active" data-page="home" onclick="navigate('home')">Home</a>
+    <a href="#" class="nav-link" data-page="about" onclick="navigate('about')">About</a>
+    <a href="#" class="nav-link" data-page="services" onclick="navigate('services')">Services</a>
+    <a href="#" class="nav-link" data-page="portfolio" onclick="navigate('portfolio')">Portfolio</a>
+    <a href="#" class="nav-link" data-page="pricing" onclick="navigate('pricing')">Pricing</a>
+    <a href="#" class="nav-link" data-page="contact" onclick="navigate('contact')">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-btn" onclick="toggleTheme()" aria-label="Toggle theme" id="themeBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+    <button class="nav-cta" onclick="navigate('contact')">Start Project</button>
+    <button class="nav-btn mobile-menu-btn" onclick="openMobileMenu()" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+</nav>
 
-    <!-- ==================== HOME PAGE ==================== -->
-    <div id="page-home" class="page active">
-        <section class="hero-section">
-            <div class="hero-bg"></div>
-            <div class="hero-pattern"></div>
-            <div class="max-w-7xl mx-auto px-4 relative z-10 w-full">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 fade-in" style="background: var(--accent-light); border: 1px solid var(--accent);">
-                            <span class="w-2 h-2 rounded-full animate-pulse" style="background: var(--accent);"></span>
-                            <span class="text-xs font-medium" style="color: var(--accent);">Creative Graphics Design Agency</span>
-                        </div>
-                        <h1 class="font-serif text-4xl md:text-6xl font-bold leading-[1.15] mb-4 fade-in" style="color: var(--text-primary); transition-delay: 0.1s;">We Design<br><span style="color: var(--accent);">Bold Brands</span><br>That Stand Out</h1>
-                        <p class="text-base md:text-lg mb-8 max-w-lg fade-in" style="color: var(--text-secondary); transition-delay: 0.2s;">Brave-hx transforms your vision into stunning visual experiences. From brand identity to digital design, we craft designs that captivate and convert.</p>
-                        <div class="flex flex-wrap gap-3 fade-in" style="transition-delay: 0.3s;">
-                            <a href="#" onclick="navigateTo('portfolio')" class="btn-primary-custom px-7 py-3 rounded-full text-sm">View Our Work</a>
-                            <a href="#" onclick="navigateTo('contact')" class="btn-outline-custom px-7 py-3 rounded-full text-sm">Start a Project</a>
-                        </div>
-                        <div class="flex items-center gap-6 mt-10 fade-in" style="transition-delay: 0.4s;">
-                            <div><div class="font-serif text-2xl font-bold counter" style="color: var(--accent);" data-target="150">0+</div><div class="text-xs" style="color: var(--text-tertiary);">Projects Done</div></div>
-                            <div class="w-px h-10" style="background: var(--border-color);"></div>
-                            <div><div class="font-serif text-2xl font-bold counter" style="color: var(--accent);" data-target="50">0+</div><div class="text-xs" style="color: var(--text-tertiary);">Happy Clients</div></div>
-                            <div class="w-px h-10" style="background: var(--border-color);"></div>
-                            <div><div class="font-serif text-2xl font-bold counter" style="color: var(--accent);" data-target="5">0+</div><div class="text-xs" style="color: var(--text-tertiary);">Years Exp</div></div>
-                        </div>
-                    </div>
-                    <div class="relative flex justify-center fade-in" style="transition-delay: 0.3s;">
-                        <div class="w-72 h-72 md:w-80 md:h-80 rounded-3xl overflow-hidden shadow-xl">
-                            <img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/13e194f57-b360-4926-b107-98c30b4a94ad.png" alt="Brave-hx Creative Design" width="400" height="400" style="width: 100%; height: 100%; object-fit: cover;" fetchpriority="high" decoding="async">
-                        </div>
-                        <div class="absolute -top-3 -right-3 w-14 h-14 rounded-xl flex items-center justify-center text-xl" style="background: var(--accent-secondary); color: #fff; box-shadow: var(--shadow-md);">🎨</div>
-                        <div class="absolute -bottom-3 -left-4 rounded-xl p-3 bg-card shadow-md flex items-center gap-2" style="background: var(--bg-card); border: 1px solid var(--border-color);">
-                            <span>⭐</span><span class="text-xs font-medium">5.0 Rating</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+  <a href="#" onclick="navigate('home'); closeMobileMenu()">Home</a>
+  <a href="#" onclick="navigate('about'); closeMobileMenu()">About</a>
+  <a href="#" onclick="navigate('services'); closeMobileMenu()">Services</a>
+  <a href="#" onclick="navigate('portfolio'); closeMobileMenu()">Portfolio</a>
+  <a href="#" onclick="navigate('pricing'); closeMobileMenu()">Pricing</a>
+  <a href="#" onclick="navigate('contact'); closeMobileMenu()">Contact</a>
+</div>
 
-        <!-- Services Preview (compact) -->
-        <section class="py-12 bg-secondary">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-10 fade-in">
-                    <span class="text-sm font-semibold tracking-widest uppercase" style="color: var(--accent);">What We Do</span>
-                    <h2 class="font-serif text-3xl md:text-4xl font-bold mt-2 mb-3" style="color: var(--text-primary);">Our Services</h2>
-                    <p class="text-base max-w-2xl mx-auto" style="color: var(--text-secondary);">Comprehensive graphic design services to help your brand shine.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="card-custom p-6 fade-in"><div class="service-icon mb-4">🎨</div><h3 class="font-serif text-lg font-bold mb-2" style="color: var(--text-primary);">Brand Identity</h3><p class="text-sm leading-relaxed mb-3" style="color: var(--text-secondary);">Complete identity systems, logos, palettes, guidelines.</p><a href="#" onclick="navigateTo('services')" class="text-sm font-semibold inline-flex items-center gap-1" style="color: var(--accent);">Learn More →</a></div>
-                    <div class="card-custom p-6 fade-in"><div class="service-icon mb-4">✏️</div><h3 class="font-serif text-lg font-bold mb-2" style="color: var(--text-primary);">Logo Design</h3><p class="text-sm leading-relaxed mb-3" style="color: var(--text-secondary);">Unique, memorable logos that make a lasting impression.</p><a href="#" onclick="navigateTo('services')" class="text-sm font-semibold inline-flex items-center gap-1" style="color: var(--accent);">Learn More →</a></div>
-                    <div class="card-custom p-6 fade-in"><div class="service-icon mb-4">📱</div><h3 class="font-serif text-lg font-bold mb-2" style="color: var(--text-primary);">Social Media</h3><p class="text-sm leading-relaxed mb-3" style="color: var(--text-secondary);">Eye-catching graphics, templates, and campaign visuals.</p><a href="#" onclick="navigateTo('services')" class="text-sm font-semibold inline-flex items-center gap-1" style="color: var(--accent);">Learn More →</a></div>
-                    <div class="card-custom p-6 fade-in"><div class="service-icon mb-4">💻</div><h3 class="font-serif text-lg font-bold mb-2" style="color: var(--text-primary);">UI/UX Design</h3><p class="text-sm leading-relaxed mb-3" style="color: var(--text-secondary);">Intuitive interfaces for websites and mobile apps.</p><a href="#" onclick="navigateTo('services')" class="text-sm font-semibold inline-flex items-center gap-1" style="color: var(--accent);">Learn More →</a></div>
-                    <div class="card-custom p-6 fade-in"><div class="service-icon mb-4">🖨️</div><h3 class="font-serif text-lg font-bold mb-2" style="color: var(--text-primary);">Print Design</h3><p class="text-sm leading-relaxed mb-3" style="color: var(--text-secondary);">Business cards, flyers, brochures, and packaging.</p><a href="#" onclick="navigateTo('services')" class="text-sm font-semibold inline-flex items-center gap-1" style="color: var(--accent);">Learn More →</a></div>
-                    <div class="card-custom p-6 fade-in"><div class="service-icon mb-4">🎬</div><h3 class="font-serif text-lg font-bold mb-2" style="color: var(--text-primary);">Motion Graphics</h3><p class="text-sm leading-relaxed mb-3" style="color: var(--text-secondary);">Dynamic animations, video intros, visual effects.</p><a href="#" onclick="navigateTo('services')" class="text-sm font-semibold inline-flex items-center gap-1" style="color: var(--accent);">Learn More →</a></div>
-                </div>
-                <div class="text-center mt-8 fade-in"><a href="#" onclick="navigateTo('services')" class="btn-outline-custom px-8 py-3 rounded-full text-sm">View All Services →</a></div>
-            </div>
-        </section>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
-        <!-- Portfolio Preview -->
-        <section class="py-12">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-10 fade-in">
-                    <span class="text-sm font-semibold tracking-widest uppercase" style="color: var(--accent);">Our Work</span>
-                    <h2 class="font-serif text-3xl md:text-4xl font-bold mt-2 mb-3" style="color: var(--text-primary);">Featured Projects</h2>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="portfolio-card aspect-[4/3] fade-in"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/1de963cbc-fa1d-48f4-b898-6bd05c88c0ed.png" alt="Brand Identity" width="600" height="450" class="w-full h-full object-cover" loading="lazy"><div class="portfolio-overlay"><div><span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--accent-secondary);">Brand Identity</span><h3 class="font-serif text-lg font-bold text-white mt-1">Abstract Brand Design</h3></div></div></div>
-                    <div class="portfolio-card aspect-[4/3] fade-in"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/143d138a5-e5de-4613-85fe-03c661b1832f.png" alt="Product Mockup" width="600" height="450" class="w-full h-full object-cover" loading="lazy"><div class="portfolio-overlay"><div><span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--accent-secondary);">Mockup</span><h3 class="font-serif text-lg font-bold text-white mt-1">Product Branding Suite</h3></div></div></div>
-                    <div class="portfolio-card aspect-[4/3] fade-in"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/12520c937-1a8b-4d6d-8e01-311d0f441a24.png" alt="Social Media" width="600" height="450" class="w-full h-full object-cover" loading="lazy"><div class="portfolio-overlay"><div><span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--accent-secondary);">Social Media</span><h3 class="font-serif text-lg font-bold text-white mt-1">Social Campaign</h3></div></div></div>
-                </div>
-                <div class="text-center mt-8 fade-in"><a href="#" onclick="navigateTo('portfolio')" class="btn-outline-custom px-8 py-3 rounded-full text-sm">View All Projects →</a></div>
-            </div>
-        </section>
-
-        <!-- Testimonials -->
-        <section class="py-12 bg-secondary">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-10 fade-in"><span class="text-sm font-semibold tracking-widest uppercase" style="color: var(--accent);">Testimonials</span><h2 class="font-serif text-3xl md:text-4xl font-bold mt-2 mb-3" style="color: var(--text-primary);">What Clients Say</h2></div>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="testimonial-card-custom fade-in"><div class="flex gap-1 mb-3">★★★★★</div><p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary);">"Brave-hx completely transformed our brand. Their creativity exceeded expectations."</p><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-xs font-bold">A</div><div><div class="font-semibold text-sm">Adewale Johnson</div><div class="text-xs" style="color: var(--text-tertiary);">CEO, TechVentures</div></div></div></div>
-                    <div class="testimonial-card-custom fade-in"><div class="flex gap-1 mb-3">★★★★★</div><p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary);">"Social media designs boosted our engagement by 300%. Unmatched visual storytelling."</p><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-xs font-bold">F</div><div><div class="font-semibold text-sm">Fatima Ibrahim</div><div class="text-xs" style="color: var(--text-tertiary);">Marketing Director, GlowUp</div></div></div></div>
-                    <div class="testimonial-card-custom fade-in"><div class="flex gap-1 mb-3">★★★★★</div><p class="text-sm leading-relaxed mb-4" style="color: var(--text-secondary);">"Professional, creative, fast. Delivered our branding package in record time."</p><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold">C</div><div><div class="font-semibold text-sm">Chidi Okonkwo</div><div class="text-xs" style="color: var(--text-tertiary);">Founder, FreshBite Foods</div></div></div></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA (compact) -->
-        <section class="py-12" style="background: var(--accent);">
-            <div class="max-w-4xl mx-auto px-4 text-center fade-in">
-                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Ready to Make Your Brand Unforgettable?</h2>
-                <p class="text-base mb-8 text-white/80">Let's collaborate and create something extraordinary.</p>
-                <div class="flex flex-wrap justify-center gap-3">
-                    <a href="https://wa.me/2349151186880" target="_blank" class="px-8 py-3 rounded-full font-semibold text-sm bg-white inline-flex items-center gap-2 transition hover:shadow-lg" style="color: var(--accent);">Chat on WhatsApp <span>→</span></a>
-                    <a href="#" onclick="navigateTo('contact')" class="px-8 py-3 rounded-full font-semibold text-sm border-2 border-white text-white inline-flex items-center gap-2 hover:bg-white hover:text-blue-600">Start a Project</a>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- ABOUT PAGE (compact) -->
-    <div id="page-about" class="page">
-        <div class="page-header"><div class="max-w-7xl mx-auto px-4"><div class="breadcrumb mb-3"><a href="#" onclick="navigateTo('home')">Home</a><span>/</span><span>About Us</span></div><h1 class="font-serif text-4xl md:text-5xl font-bold" style="color: var(--text-primary);">About <span style="color: var(--accent);">Brave-hx</span></h1><p class="text-base mt-2 max-w-2xl" style="color: var(--text-secondary);">Learn about our story, mission, and the passionate team behind every design.</p></div></div>
-        <section class="py-12"><div class="max-w-7xl mx-auto px-4"><div class="grid lg:grid-cols-2 gap-10 items-center"><div class="fade-in"><div class="relative"><div class="w-full aspect-square rounded-2xl overflow-hidden shadow-lg"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/1de963cbc-fa1d-48f4-b898-6bd05c88c0ed.png" alt="Brave-hx Design" width="600" height="600" class="w-full h-full object-cover" loading="lazy"></div><div class="absolute -bottom-4 -right-4 w-36 h-36 rounded-xl p-4 bg-card shadow-md flex flex-col justify-center" style="background: var(--bg-card); border: 1px solid var(--border-color);"><div class="font-serif text-3xl font-bold" style="color: var(--accent);">5+</div><div class="text-xs mt-1" style="color: var(--text-tertiary);">Years of Creative Excellence</div></div></div></div><div class="fade-in" style="transition-delay: 0.2s;"><span class="text-sm font-semibold tracking-widest uppercase" style="color: var(--accent);">Our Story</span><h2 class="font-serif text-3xl font-bold mt-3 mb-4" style="color: var(--text-primary);">Crafting Visual Stories That Inspire</h2><div class="w-12 h-1 rounded-full mb-6" style="background: var(--accent);"></div><p class="text-base leading-relaxed mb-4" style="color: var(--text-secondary);">At Brave-hx, we believe every brand has a unique story waiting to be told through design. Founded with a passion for visual excellence, our team of dedicated creatives combines artistic vision with strategic thinking.</p><p class="text-base leading-relaxed" style="color: var(--text-secondary);">From startups to established businesses, we've helped brands create memorable visual identities that resonate and stand out.</p></div></div></div></section>
-
-        <!-- Meet the CEO (compact) -->
-        <section class="py-12 bg-secondary">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-8 fade-in">
-                    <span class="text-sm font-semibold tracking-widest uppercase" style="color: var(--accent);">Leadership</span>
-                    <h2 class="font-serif text-3xl md:text-4xl font-bold mt-2 mb-2" style="color: var(--text-primary);">Meet the CEO</h2>
-                </div>
-                <div class="max-w-4xl mx-auto">
-                    <div class="card-custom p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 fade-in">
-                        <div class="flex-shrink-0">
-                            <div class="w-32 h-32 md:w-44 md:h-44 rounded-full bg-gray-300 flex items-center justify-center shadow-md">
-                                <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v1.2c0 .7.5 1.2 1.2 1.2h16.8c.7 0 1.2-.5 1.2-1.2v-1.2c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="font-serif text-2xl font-bold mb-1" style="color: var(--text-primary);">Alex Brave</h3>
-                            <p class="text-base font-medium mb-3" style="color: var(--accent);">Founder & Creative Director</p>
-                            <blockquote class="ceo-quote text-lg md:text-xl italic leading-relaxed mb-4" style="color: var(--text-secondary);">
-                                “Design is the visual voice of your brand. We craft identities that resonate, inspire, and drive real impact.”
-                            </blockquote>
-                            <p class="text-sm" style="color: var(--text-tertiary);">Alex brings over 8 years of experience in brand strategy, helping businesses of all sizes find their visual identity.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Rest of about page condensed: Mission/Vision, Values, Stats, Team (keep similar tight structure) -->
-        <section class="py-12"><div class="max-w-7xl mx-auto px-4"><div class="grid md:grid-cols-2 gap-6"><div class="card-custom p-6 fade-in"><div class="text-2xl mb-3">🎯</div><h3 class="font-serif text-xl font-bold mb-2" style="color: var(--text-primary);">Our Mission</h3><p class="text-sm" style="color: var(--text-secondary);">Empower businesses with exceptional graphic design that builds recognition and drives connections.</p></div><div class="card-custom p-6 fade-in"><div class="text-2xl mb-3">🔭</div><h3 class="font-serif text-xl font-bold mb-2" style="color: var(--text-primary);">Our Vision</h3><p class="text-sm" style="color: var(--text-secondary);">Become the leading creative agency known for innovative, purposeful design.</p></div></div></div></section>
-        <section class="py-12 bg-secondary"><div class="max-w-7xl mx-auto px-4"><div class="text-center mb-8"><span class="text-sm font-semibold tracking-widest uppercase" style="color: var(--accent);">What Drives Us</span><h2 class="font-serif text-3xl font-bold mt-2" style="color: var(--text-primary);">Core Values</h2></div><div class="grid grid-cols-2 md:grid-cols-4 gap-4"><div class="card-custom p-4 text-center fade-in"><div class="text-2xl mb-2">💡</div><h4 class="font-serif text-sm font-bold">Creativity</h4><p class="text-xs" style="color: var(--text-secondary);">Pushing boundaries</p></div><div class="card-custom p-4 text-center fade-in"><div class="text-2xl mb-2">🎯</div><h4 class="font-serif text-sm font-bold">Precision</h4><p class="text-xs" style="color: var(--text-secondary);">Pixel-perfect detail</p></div><div class="card-custom p-4 text-center fade-in"><div class="text-2xl mb-2">🤝</div><h4 class="font-serif text-sm font-bold">Collaboration</h4><p class="text-xs" style="color: var(--text-secondary);">Client partnership</p></div><div class="card-custom p-4 text-center fade-in"><div class="text-2xl mb-2">⚡</div><h4 class="font-serif text-sm font-bold">Excellence</h4><p class="text-xs" style="color: var(--text-secondary);">Outstanding quality</p></div></div></div></section>
-        <section class="py-12"><div class="max-w-7xl mx-auto px-4"><div class="grid grid-cols-2 md:grid-cols-4 gap-6"><div class="stat-card fade-in"><div class="font-serif text-3xl font-bold" style="color: var(--accent);">150+</div><div class="text-xs" style="color: var(--text-tertiary);">Projects</div></div><div class="stat-card fade-in"><div class="font-serif text-3xl font-bold" style="color: var(--accent);">50+</div><div class="text-xs" style="color: var(--text-tertiary);">Clients</div></div><div class="stat-card fade-in"><div class="font-serif text-3xl font-bold" style="color: var(--accent);">5+</div><div class="text-xs" style="color: var(--text-tertiary);">Years</div></div><div class="stat-card fade-in"><div class="font-serif text-3xl font-bold" style="color: var(--accent);">100%</div><div class="text-xs" style="color: var(--text-tertiary);">Satisfaction</div></div></div></div></section>
-        <section class="py-12 bg-secondary"><div class="max-w-7xl mx-auto px-4"><div class="text-center mb-8"><span class="text-sm font-semibold tracking-widest uppercase" style="color: var(--accent);">Our Team</span><h2 class="font-serif text-3xl font-bold mt-2" style="color: var(--text-primary);">Meet the Creatives</h2></div><div class="grid md:grid-cols-3 gap-6"><div class="team-card"><div class="aspect-square bg-tertiary flex items-center justify-center text-4xl">👨‍💻</div><div class="p-4"><h4 class="font-serif font-bold">Creative Director</h4><p class="text-sm" style="color: var(--accent);">Founder & Lead Designer</p><p class="text-xs mt-2" style="color: var(--text-secondary);">Visionary with 5+ years in brand identity.</p></div></div><div class="team-card"><div class="aspect-square bg-tertiary flex items-center justify-center text-4xl">👩‍🎨</div><div class="p-4"><h4 class="font-serif font-bold">Senior Designer</h4><p class="text-sm" style="color: var(--accent);">UI/UX & Digital Design</p><p class="text-xs mt-2" style="color: var(--text-secondary);">Intuitive digital experiences.</p></div></div><div class="team-card"><div class="aspect-square bg-tertiary flex items-center justify-center text-4xl">🧑‍💼</div><div class="p-4"><h4 class="font-serif font-bold">Project Manager</h4><p class="text-sm" style="color: var(--accent);">Client Relations</p><p class="text-xs mt-2" style="color: var(--text-secondary);">Smooth delivery & strong relationships.</p></div></div></div></div></section>
-    </div>
-
-    <!-- SERVICES PAGE (compact) -->
-    <div id="page-services" class="page">
-        <div class="page-header"><div class="max-w-7xl mx-auto px-4"><div class="breadcrumb mb-3"><a href="#" onclick="navigateTo('home')">Home</a><span>/</span><span>Services</span></div><h1 class="font-serif text-4xl md:text-5xl font-bold" style="color: var(--text-primary);">Our <span style="color: var(--accent);">Services</span></h1><p class="text-base mt-2 max-w-2xl" style="color: var(--text-secondary);">Comprehensive design solutions tailored to elevate your brand.</p></div></div>
-        <section class="py-12"><div class="max-w-7xl mx-auto px-4"><div class="space-y-16">
-            <div class="grid lg:grid-cols-2 gap-8 items-center fade-in"><div><div class="service-icon mb-4">🎨</div><h2 class="font-serif text-2xl font-bold mb-3" style="color: var(--text-primary);">Brand Identity Design</h2><p class="text-base leading-relaxed mb-4" style="color: var(--text-secondary);">Complete brand identity systems that define your visual presence.</p><ul class="space-y-2 text-sm"><li>✓ Logo Design & Variations</li><li>✓ Color Palette & Typography</li><li>✓ Brand Guidelines Document</li><li>✓ Business Card & Stationery</li></ul><a href="#" onclick="navigateTo('contact')" class="btn-primary-custom inline-flex px-6 py-2.5 rounded-full text-sm mt-6">Get Started</a></div><div class="rounded-2xl overflow-hidden shadow-lg"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/1de963cbc-fa1d-48f4-b898-6bd05c88c0ed.png" alt="Brand Identity" width="600" height="400" class="w-full h-full object-cover" loading="lazy"></div></div>
-            <div class="grid lg:grid-cols-2 gap-8 items-center fade-in"><div class="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-lg"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/143d138a5-e5de-4613-85fe-03c661b1832f.png" alt="Logo Design" width="600" height="400" class="w-full h-full object-cover" loading="lazy"></div><div class="order-1 lg:order-2"><div class="service-icon mb-4">✏️</div><h2 class="font-serif text-2xl font-bold mb-3" style="color: var(--text-primary);">Logo Design</h2><p class="text-base leading-relaxed mb-4" style="color: var(--text-secondary);">Unique, memorable logos that capture your brand essence.</p><ul class="space-y-2 text-sm"><li>✓ Multiple Concept Options</li><li>✓ Unlimited Revisions</li><li>✓ All File Formats</li><li>✓ Full Ownership Rights</li></ul><a href="#" onclick="navigateTo('contact')" class="btn-primary-custom inline-flex px-6 py-2.5 rounded-full text-sm mt-6">Get Started</a></div></div>
-            <div class="grid lg:grid-cols-2 gap-8 items-center fade-in"><div><div class="service-icon mb-4">📱</div><h2 class="font-serif text-2xl font-bold mb-3" style="color: var(--text-primary);">Social Media Design</h2><p class="text-base leading-relaxed mb-4" style="color: var(--text-secondary);">Professional graphics that boost engagement and consistency.</p><ul class="space-y-2 text-sm"><li>✓ Post & Story Templates</li><li>✓ Profile & Cover Banners</li><li>✓ Campaign Visuals</li><li>✓ Ad Creatives</li></ul><a href="#" onclick="navigateTo('contact')" class="btn-primary-custom inline-flex px-6 py-2.5 rounded-full text-sm mt-6">Get Started</a></div><div class="rounded-2xl overflow-hidden shadow-lg"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/12520c937-1a8b-4d6d-8e01-311d0f441a24.png" alt="Social Media Design" width="600" height="400" class="w-full h-full object-cover" loading="lazy"></div></div>
-            <div class="grid lg:grid-cols-2 gap-8 items-center fade-in"><div class="order-2 lg:order-1 rounded-2xl overflow-hidden shadow-lg"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/13e194f57-b360-4926-b107-98c30b4a94ad.png" alt="UI/UX Design" width="600" height="400" class="w-full h-full object-cover" loading="lazy"></div><div class="order-1 lg:order-2"><div class="service-icon mb-4">💻</div><h2 class="font-serif text-2xl font-bold mb-3" style="color: var(--text-primary);">UI/UX Design</h2><p class="text-base leading-relaxed mb-4" style="color: var(--text-secondary);">Intuitive interfaces that delight users and drive conversions.</p><ul class="space-y-2 text-sm"><li>✓ Website Design</li><li>✓ Mobile App Design</li><li>✓ Wireframes & Prototypes</li><li>✓ Design Systems</li></ul><a href="#" onclick="navigateTo('contact')" class="btn-primary-custom inline-flex px-6 py-2.5 rounded-full text-sm mt-6">Get Started</a></div></div>
-        </div></div></section>
-        <!-- Pricing & Process (compact) -->
-        <section class="py-12 bg-secondary"><div class="max-w-7xl mx-auto px-4"><div class="text-center mb-8"><span class="text-sm font-semibold tracking-widest uppercase" style="color: var(--accent);">Pricing</span><h2 class="font-serif text-3xl font-bold mt-2 mb-2" style="color: var(--text-primary);">Transparent Pricing</h2></div><div class="grid md:grid-cols-3 gap-6"><div class="card-custom p-6 fade-in"><div class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--text-tertiary);">Starter</div><div class="font-serif text-3xl font-bold mb-1">₦50,000</div><div class="text-xs mb-6" style="color: var(--text-tertiary);">Starting price</div><ul class="space-y-2 text-sm mb-6"><li>✓ Logo Design (3 concepts)</li><li>✓ 3 Revisions</li><li>✓ Source Files</li><li>✓ 3-5 Day Delivery</li></ul><a href="#" onclick="navigateTo('contact')" class="btn-outline-custom w-full py-2.5 rounded-full text-sm text-center block">Get Started</a></div><div class="card-custom p-6 fade-in relative" style="border-color: var(--accent); border-width: 2px;"><div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold text-white" style="background: var(--accent);">POPULAR</div><div class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--text-tertiary);">Professional</div><div class="font-serif text-3xl font-bold mb-1">₦150,000</div><div class="text-xs mb-6" style="color: var(--text-tertiary);">Starting price</div><ul class="space-y-2 text-sm mb-6"><li>✓ Full Brand Identity</li><li>✓ Unlimited Revisions</li><li>✓ Brand Guidelines</li><li>✓ Business Card</li><li>✓ Social Media Kit</li><li>✓ 7-10 Day Delivery</li></ul><a href="#" onclick="navigateTo('contact')" class="btn-primary-custom w-full py-2.5 rounded-full text-sm text-center block">Get Started</a></div><div class="card-custom p-6 fade-in"><div class="text-xs font-semibold uppercase tracking-wider mb-2" style="color: var(--text-tertiary);">Enterprise</div><div class="font-serif text-3xl font-bold mb-1">Custom</div><div class="text-xs mb-6" style="color: var(--text-tertiary);">Tailored to you</div><ul class="space-y-2 text-sm mb-6"><li>✓ Everything in Pro</li><li>✓ UI/UX Design</li><li>✓ Motion Graphics</li><li>✓ Print Materials</li><li>✓ Priority Support</li><li>✓ Dedicated Designer</li></ul><a href="#" onclick="navigateTo('contact')" class="btn-outline-custom w-full py-2.5 rounded-full text-sm text-center block">Contact Us</a></div></div></div></section>
-        <section class="py-12"><div class="max-w-7xl mx-auto px-4"><div class="text-center mb-8"><span class="text-sm font-semibold tracking-widest uppercase" style="color: var(--accent);">How We Work</span><h2 class="font-serif text-3xl font-bold mt-2" style="color: var(--text-primary);">Our Process</h2></div><div class="grid grid-cols-2 md:grid-cols-4 gap-6"><div class="text-center fade-in"><div class="w-12 h-12 mx-auto rounded-xl bg-accent text-white flex items-center justify-center font-serif text-lg font-bold mb-3">01</div><h4 class="font-serif font-bold mb-1">Discovery</h4><p class="text-xs" style="color: var(--text-secondary);">Learn about your brand</p></div><div class="text-center fade-in"><div class="w-12 h-12 mx-auto rounded-xl bg-accent text-white flex items-center justify-center font-serif text-lg font-bold mb-3">02</div><h4 class="font-serif font-bold mb-1">Concept</h4><p class="text-xs" style="color: var(--text-secondary);">Develop creative directions</p></div><div class="text-center fade-in"><div class="w-12 h-12 mx-auto rounded-xl bg-accent text-white flex items-center justify-center font-serif text-lg font-bold mb-3">03</div><h4 class="font-serif font-bold mb-1">Design</h4><p class="text-xs" style="color: var(--text-secondary);">Refine into polished designs</p></div><div class="text-center fade-in"><div class="w-12 h-12 mx-auto rounded-xl bg-accent text-white flex items-center justify-center font-serif text-lg font-bold mb-3">04</div><h4 class="font-serif font-bold mb-1">Delivery</h4><p class="text-xs" style="color: var(--text-secondary);">Final files in all formats</p></div></div></div></section>
-    </div>
-
-    <!-- PORTFOLIO PAGE (compact) -->
-    <div id="page-portfolio" class="page">
-        <div class="page-header"><div class="max-w-7xl mx-auto px-4"><div class="breadcrumb mb-3"><a href="#" onclick="navigateTo('home')">Home</a><span>/</span><span>Portfolio</span></div><h1 class="font-serif text-4xl md:text-5xl font-bold" style="color: var(--text-primary);">Our <span style="color: var(--accent);">Portfolio</span></h1><p class="text-base mt-2 max-w-2xl" style="color: var(--text-secondary);">A showcase of our best design work across industries.</p></div></div>
-        <section class="py-6 border-b border-theme"><div class="max-w-7xl mx-auto px-4"><div class="flex flex-wrap gap-3"><button class="filter-btn active px-4 py-1.5 rounded-full text-sm font-medium" style="background: var(--accent); color: #fff;" onclick="filterPortfolio('all', this)">All</button><button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium" style="background: var(--bg-tertiary); color: var(--text-secondary); border: 1px solid var(--border-color);" onclick="filterPortfolio('branding', this)">Branding</button><button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium" style="background: var(--bg-tertiary); color: var(--text-secondary); border: 1px solid var(--border-color);" onclick="filterPortfolio('logo', this)">Logo</button><button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium" style="background: var(--bg-tertiary); color: var(--text-secondary); border: 1px solid var(--border-color);" onclick="filterPortfolio('social', this)">Social</button><button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium" style="background: var(--bg-tertiary); color: var(--text-secondary); border: 1px solid var(--border-color);" onclick="filterPortfolio('print', this)">Print</button></div></div></section>
-        <section class="py-8"><div class="max-w-7xl mx-auto px-4"><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolioGrid">
-            <div class="portfolio-card aspect-[4/3] fade-in portfolio-item" data-category="branding"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/1de963cbc-fa1d-48f4-b898-6bd05c88c0ed.png" alt="Abstract Brand" width="600" height="450" class="w-full h-full object-cover" loading="lazy"><div class="portfolio-overlay"><div><span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--accent-secondary);">Branding</span><h3 class="font-serif text-lg font-bold text-white mt-1">Abstract Brand Identity</h3></div></div></div>
-            <div class="portfolio-card aspect-[4/3] fade-in portfolio-item" data-category="branding"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/143d138a5-e5de-4613-85fe-03c661b1832f.png" alt="Product Suite" width="600" height="450" class="w-full h-full object-cover" loading="lazy"><div class="portfolio-overlay"><div><span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--accent-secondary);">Branding</span><h3 class="font-serif text-lg font-bold text-white mt-1">Product Branding Suite</h3></div></div></div>
-            <div class="portfolio-card aspect-[4/3] fade-in portfolio-item" data-category="social"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/12520c937-1a8b-4d6d-8e01-311d0f441a24.png" alt="Social Campaign" width="600" height="450" class="w-full h-full object-cover" loading="lazy"><div class="portfolio-overlay"><div><span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--accent-secondary);">Social</span><h3 class="font-serif text-lg font-bold text-white mt-1">Social Campaign Design</h3></div></div></div>
-            <!-- remaining items kept similar but condensed, I'll include placeholder ones to keep the grid -->
-            <div class="portfolio-card aspect-[4/3] fade-in portfolio-item" data-category="logo"><img src="https://image.qwenlm.ai/public_source/2f2b5948-e322-4fc6-9abb-0df8c18bf520/13e194f57-b360-4926-b107-98c30b4a94ad.png" alt="Logo Concepts" width="600" height="450" class="w-full h-full object-cover" loading="lazy"><div class="portfolio-overlay"><div><span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--accent-secondary);">Logo</span><h3 class="font-serif text-lg font-bold text-white mt-1">Creative Logo Concepts</h3></div></div></div>
-            <div class="portfolio-card aspect-[4/3] fade-in portfolio-item" data-category="print"><div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-900 to-purple-900"><div class="text-center text-white"><div class="text-5xl mb-2">📋</div><div class="font-serif text-xl font-bold">Print Design</div><div class="text-sm opacity-75">Brochures & Flyers</div></div></div><div class="portfolio-overlay"><div><span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--accent-secondary);">Print</span><h3 class="font-serif text-lg font-bold text-white mt-1">Corporate Print Suite</h3></div></div></div>
-            <div class="portfolio-card aspect-[4/3] fade-in portfolio-item" data-category="branding"><div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-900 to-gray-900"><div class="text-center text-white"><div class="text-5xl mb-2">🏆</div><div class="font-serif text-xl font-bold">Award Winning</div></div></div><div class="portfolio-overlay"><div><span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--accent-secondary);">Branding</span><h3 class="font-serif text-lg font-bold text-white mt-1">Award-Winning Design</h3></div></div></div>
-            <div class="portfolio-card aspect-[4/3] fade-in portfolio-item" data-category="social"><div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-green-900 to-gray-900"><div class="text-center text-white"><div class="text-5xl mb-2">📲</div><div class="font-serif text-xl font-bold">Instagram Kit</div></div></div><div class="portfolio-overlay"><div><span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--accent-secondary);">Social</span><h3 class="font-serif text-lg font-bold text-white mt-1">Instagram Brand Kit</h3></div></div></div>
-            <div class="portfolio-card aspect-[4/3] fade-in portfolio-item" data-category="logo"><div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-yellow-900 to-gray-900"><div class="text-center text-white"><div class="text-5xl mb-2">✏️</div><div class="font-serif text-xl font-bold">Logo Collection</div></div></div><div class="portfolio-overlay"><div><span class="text-xs font-semibold uppercase tracking-wider" style="color: var(--accent-secondary);">Logo</span><h3 class="font-serif text-lg font-bold text-white mt-1">Logo Collection</h3></div></div></div>
-        </div></div></section>
-    </div>
-
-    <!-- CONTACT PAGE (compact) -->
-    <div id="page-contact" class="page">
-        <div class="page-header"><div class="max-w-7xl mx-auto px-4"><div class="breadcrumb mb-3"><a href="#" onclick="navigateTo('home')">Home</a><span>/</span><span>Contact</span></div><h1 class="font-serif text-4xl md:text-5xl font-bold" style="color: var(--text-primary);">Get In <span style="color: var(--accent);">Touch</span></h1><p class="text-base mt-2 max-w-2xl" style="color: var(--text-secondary);">Ready to elevate your brand? Let's discuss your project.</p></div></div>
-        <section class="py-12"><div class="max-w-7xl mx-auto px-4"><div class="grid lg:grid-cols-5 gap-8">
-            <div class="lg:col-span-2">
-                <h3 class="font-serif text-2xl font-bold mb-6" style="color: var(--text-primary);">Contact Information</h3>
-                <div class="space-y-4 mb-8">
-                    <a href="mailto:info.bravehx@gmail.com" class="flex items-start gap-3"><div class="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center" style="color: var(--accent);">✉️</div><div><div class="text-xs uppercase tracking-wider" style="color: var(--text-tertiary);">Email</div><div class="font-semibold text-sm">info.bravehx@gmail.com</div></div></a>
-                    <a href="https://wa.me/2349151186880" target="_blank" class="flex items-start gap-3"><div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center" style="color: #22c55e;">💬</div><div><div class="text-xs uppercase tracking-wider" style="color: var(--text-tertiary);">WhatsApp</div><div class="font-semibold text-sm">+234 915 118 6880</div></div></a>
-                    <div class="flex items-start gap-3"><div class="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center" style="color: var(--accent);">⏱️</div><div><div class="text-xs uppercase tracking-wider" style="color: var(--text-tertiary);">Response Time</div><div class="font-semibold text-sm">Within 24 hours</div></div></div>
-                </div>
-                <h4 class="font-semibold mb-3 text-sm">Follow Us</h4>
-                <div class="flex gap-2">
-                    <a href="#" class="w-9 h-9 rounded-lg bg-tertiary flex items-center justify-center" style="color: var(--text-tertiary);">FB</a>
-                    <a href="#" class="w-9 h-9 rounded-lg bg-tertiary flex items-center justify-center" style="color: var(--text-tertiary);">IG</a>
-                    <a href="#" class="w-9 h-9 rounded-lg bg-tertiary flex items-center justify-center" style="color: var(--text-tertiary);">TW</a>
-                    <a href="#" class="w-9 h-9 rounded-lg bg-tertiary flex items-center justify-center" style="color: var(--text-tertiary);">YT</a>
-                </div>
-            </div>
-            <div class="lg:col-span-3">
-                <form id="contactForm" class="card-custom p-6 md:p-8" onsubmit="handleSubmit(event)">
-                    <h3 class="font-serif text-2xl font-bold mb-6" style="color: var(--text-primary);">Send a Message</h3>
-                    <div class="grid md:grid-cols-2 gap-4 mb-4">
-                        <div><input type="text" placeholder="Your Name *" required class="w-full rounded-lg px-4 py-2.5 text-sm" style="background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-primary);"></div>
-                        <div><input type="email" placeholder="Email Address *" required class="w-full rounded-lg px-4 py-2.5 text-sm" style="background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-primary);"></div>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-4 mb-4">
-                        <select class="w-full rounded-lg px-4 py-2.5 text-sm" style="background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-primary);"><option>Select service</option><option>Brand Identity</option><option>Logo Design</option><option>Social Media</option><option>UI/UX</option><option>Print</option><option>Motion Graphics</option><option>Other</option></select>
-                        <select class="w-full rounded-lg px-4 py-2.5 text-sm" style="background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-primary);"><option>Select budget</option><option>₦50k - ₦100k</option><option>₦100k - ₦250k</option><option>₦250k - ₦500k</option><option>₦500k+</option></select>
-                    </div>
-                    <div class="mb-5"><textarea rows="4" placeholder="Project details..." required class="w-full rounded-lg px-4 py-2.5 text-sm resize-none" style="background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-primary);"></textarea></div>
-                    <button type="submit" id="submitBtn" class="btn-primary-custom w-full py-3 rounded-lg text-sm"><span id="btnText">Send Message</span></button>
-                    <div id="formSuccess" class="hidden mt-3 p-3 rounded-lg text-center" style="background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2);"><div class="font-semibold text-sm" style="color: #22c55e;">✓ Sent successfully!</div></div>
-                </form>
-            </div>
-        </div></div></section>
-        <!-- FAQ (compact) -->
-        <section class="py-12 bg-secondary"><div class="max-w-3xl mx-auto px-4"><div class="text-center mb-8"><span class="text-sm font-semibold tracking-widest uppercase" style="color: var(--accent);">FAQ</span><h2 class="font-serif text-3xl font-bold mt-2" style="color: var(--text-primary);">Common Questions</h2></div><div class="space-y-3"><div class="card-custom p-4 fade-in"><h4 class="font-semibold mb-1">How long does a typical project take?</h4><p class="text-sm" style="color: var(--text-secondary);">Logo 3-5 days, full brand identity 7-14 days depending on scope.</p></div><div class="card-custom p-4 fade-in"><h4 class="font-semibold mb-1">Do you offer revisions?</h4><p class="text-sm" style="color: var(--text-secondary);">Yes, packages include revisions; Pro/Enterprise include unlimited.</p></div><div class="card-custom p-4 fade-in"><h4 class="font-semibold mb-1">What file formats do you deliver?</h4><p class="text-sm" style="color: var(--text-secondary);">AI, PSD, PDF, PNG, JPG, SVG, EPS – web and print ready.</p></div><div class="card-custom p-4 fade-in"><h4 class="font-semibold mb-1">How do I get started?</h4><p class="text-sm" style="color: var(--text-secondary);">Fill the form or WhatsApp; we'll schedule a consultation.</p></div></div></div></section>
-    </div>
-
-    <!-- FOOTER -->
-    <footer style="background: var(--footer-bg);" class="py-8 px-4">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8 mb-6">
-            <div class="md:col-span-2">
-                <a href="#" onclick="navigateTo('home')" class="flex items-center gap-2 mb-3"><span class="w-8 h-8 rounded-lg bg-accent text-white flex items-center justify-center font-serif font-bold">B</span><span class="font-serif font-bold text-white">Brave-hx</span></a>
-                <p class="text-xs leading-relaxed max-w-md mb-4" style="color: var(--footer-text);">Brave-hx transforms brands through powerful visual storytelling.</p>
-                <div class="flex gap-2"><a href="#" class="w-8 h-8 rounded bg-white/10 flex items-center justify-center text-xs" style="color: #adb5bd;">FB</a><a href="#" class="w-8 h-8 rounded bg-white/10 flex items-center justify-center text-xs" style="color: #adb5bd;">IG</a><a href="https://wa.me/2349151186880" target="_blank" class="w-8 h-8 rounded bg-white/10 flex items-center justify-center text-xs" style="color: #adb5bd;">WA</a></div>
-            </div>
-            <div><h4 class="font-serif font-bold text-white mb-3 text-sm">Links</h4><ul class="space-y-2 text-xs" style="color: var(--footer-text);"><li><a href="#" onclick="navigateTo('home')" class="hover:text-white">Home</a></li><li><a href="#" onclick="navigateTo('about')" class="hover:text-white">About</a></li><li><a href="#" onclick="navigateTo('services')" class="hover:text-white">Services</a></li><li><a href="#" onclick="navigateTo('portfolio')" class="hover:text-white">Portfolio</a></li><li><a href="#" onclick="navigateTo('contact')" class="hover:text-white">Contact</a></li></ul></div>
-            <div><h4 class="font-serif font-bold text-white mb-3 text-sm">Contact</h4><ul class="space-y-2 text-xs" style="color: var(--footer-text);"><li>info.bravehx@gmail.com</li><li>+234 915 118 6880</li></ul></div>
-        </div>
-        <div class="text-center text-xs" style="color: var(--footer-text); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">&copy; 2024 Brave-hx. Made with ♥</div>
-    </footer>
-
-    <!-- WhatsApp Float -->
-    <a href="https://wa.me/2349151186880" target="_blank" class="whatsapp-float w-12 h-12 rounded-full flex items-center justify-center shadow-lg" style="background: #25D366;" title="Chat on WhatsApp">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967..."/></svg>
+<!-- SUPPORT OVERLAY -->
+<div class="support-overlay" id="supportOverlay">
+  <div class="support-popup">
+    <button style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text);" onclick="closeSupport()">✕</button>
+    <h3>Get in Touch</h3>
+    <p>We respond within 30 minutes.</p>
+    <a href="mailto:jamiuglobaltech@gmail.com?subject=Design%20Inquiry&body=Hello%20JAMIUGLOBALTECH,%20I%20would%20like%20to%20discuss%20a%20project." class="support-link">
+      <span class="support-link-icon">📧</span>
+      <div><strong>Email</strong><small>jamiuglobaltech@gmail.com</small></div>
     </a>
+    <a href="tel:+2349162570520" class="support-link">
+      <span class="support-link-icon">📞</span>
+      <div><strong>Call</strong><small>+234 916 257 0520</small></div>
+    </a>
+    <a href="https://wa.me/2349162570520?text=Hello%20JAMIUGLOBALTECH,%20I'm%20interested%20in%20your%20design%20services." target="_blank" class="support-link">
+      <span class="support-link-icon">💬</span>
+      <div><strong>WhatsApp</strong><small>Chat instantly</small></div>
+    </a>
+  </div>
+</div>
 
-    <script>
-        // same core JS: navigateTo, toggleTheme, toggleMenu, fadeObserver, counters, filter, form submit, scroll-to-top
-        function navigateTo(page) {
-            document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.opacity = '0'; });
-            const target = document.getElementById('page-' + page);
-            if (target) { setTimeout(() => { target.classList.add('active'); target.style.display = 'block'; setTimeout(() => { target.style.opacity = '1'; }, 50); }, 300); }
-            document.querySelectorAll('.nav-link').forEach(l => { l.classList.remove('active'); if (l.dataset.page === page) l.classList.add('active'); });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            setTimeout(() => { document.querySelectorAll('#page-' + page + ' .fade-in').forEach(el => { el.classList.remove('visible'); fadeObserver.observe(el); }); }, 400);
+<!-- ═══════════════════ PAGE: HOME ═══════════════════ -->
+<div class="page active" id="page-home">
+  <section class="hero-section">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> Accepting New Projects 2025</div>
+      <h1 class="hero-title">
+        We Design<br><span class="accent">Brands</span> That<br><span class="outline-text">Dominate</span>
+      </h1>
+      <p class="hero-subtitle">JAMIUGLOBALTECH is a premium graphic design studio crafting world-class brand identities, marketing collateral, and visual systems for ambitious businesses.</p>
+      <div class="hero-buttons">
+        <button class="btn-gold" onclick="navigate('portfolio')">View Our Work →</button>
+        <button class="btn-ghost" onclick="openSupport()">Get a Quote</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hero-stat-num">4+</div><div class="hero-stat-label">Years Experience</div></div>
+        <div><div class="hero-stat-num">120+</div><div class="hero-stat-label">Projects Delivered</div></div>
+        <div><div class="hero-stat-num">45+</div><div class="hero-stat-label">Happy Clients</div></div>
+        <div><div class="hero-stat-num">98%</div><div class="hero-stat-label">Satisfaction Rate</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span class="marquee-item"><span>🏢</span> Orion Media</span>
+      <span class="marquee-item"><span>🏢</span> Nexus Digital</span>
+      <span class="marquee-item"><span>🏢</span> Aspire Co.</span>
+      <span class="marquee-item"><span>🏢</span> Vertex Studios</span>
+      <span class="marquee-item"><span>🏢</span> Lumina Brands</span>
+      <span class="marquee-item"><span>🏢</span> Skyline Corp</span>
+      <span class="marquee-item"><span>🏢</span> Aurora Tech</span>
+      <span class="marquee-item"><span>🏢</span> Orion Media</span>
+      <span class="marquee-item"><span>🏢</span> Nexus Digital</span>
+      <span class="marquee-item"><span>🏢</span> Aspire Co.</span>
+      <span class="marquee-item"><span>🏢</span> Vertex Studios</span>
+      <span class="marquee-item"><span>🏢</span> Lumina Brands</span>
+      <span class="marquee-item"><span>🏢</span> Skyline Corp</span>
+      <span class="marquee-item"><span>🏢</span> Aurora Tech</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="section-inner fade-in">
+      <p class="section-tag">Our Services</p>
+      <h2 class="section-heading">What We Do Best</h2>
+      <p class="section-desc">From brand strategy to final deliverables, we create cohesive visual experiences that elevate your business above the competition.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon-wrap">🎨</div>
+          <h3>Brand Identity</h3>
+          <p>Complete brand systems including logos, color palettes, typography, and comprehensive guidelines.</p>
+          <a href="#" class="service-link" onclick="navigate('services')">Learn more →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">📄</div>
+          <h3>Print & Marketing</h3>
+          <p>Premium flyers, business cards, brochures, banners, and all print marketing materials.</p>
+          <a href="#" class="service-link" onclick="navigate('services')">Learn more →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">📱</div>
+          <h3>Social Media</h3>
+          <p>Scroll-stopping content, story templates, ad creatives, and cohesive feed aesthetics.</p>
+          <a href="#" class="service-link" onclick="navigate('services')">Learn more →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">📦</div>
+          <h3>Packaging Design</h3>
+          <p>Custom packaging, product labels, merch graphics, and retail-ready design solutions.</p>
+          <a href="#" class="service-link" onclick="navigate('services')">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--bg2);">
+    <div class="section-inner fade-in">
+      <p class="section-tag">Our Process</p>
+      <h2 class="section-heading">How We Work</h2>
+      <p class="section-desc">A streamlined, transparent process designed to deliver exceptional results on time, every time.</p>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="process-num">01</div>
+          <h4>Discovery</h4>
+          <p>Deep dive into your brand, goals, audience, and competitive landscape.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">02</div>
+          <h4>Strategy</h4>
+          <p>Develop creative direction and visual strategy aligned with your objectives.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">03</div>
+          <h4>Design</h4>
+          <p>Craft pixel-perfect designs with attention to every detail.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">04</div>
+          <h4>Deliver</h4>
+          <p>Final files in all formats, ready for print and digital use.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner fade-in">
+      <p class="section-tag">Testimonials</p>
+      <h2 class="section-heading">What Clients Say</h2>
+      <p class="section-desc">Don't just take our word for it — hear from the brands we've helped transform.</p>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Muhammad created stunning branding for my food business. The attention to detail and creative vision exceeded all expectations. Highly recommended!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">HC</div>
+            <div><div class="testimonial-name">Heaven's Creamy Bites</div><div class="testimonial-role">Brand Identity Project</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Flyers and banners were top-notch. Amazing turnaround time and the quality speaks for itself. Our marketing materials now look world-class."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">CS</div>
+            <div><div class="testimonial-name">Corporate Solutions Ltd</div><div class="testimonial-role">Print Design</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Social media graphics transformed our online presence. Engagement doubled within the first month. JAMIUGLOBALTECH understands visual storytelling."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">TK</div>
+            <div><div class="testimonial-name">Tolu Kemi</div><div class="testimonial-role">Social Media Design</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <h2>Ready to Elevate <span style="color:var(--accent)">Your Brand?</span></h2>
+    <p>Let's create something extraordinary together. We respond within 30 minutes.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-gold" onclick="navigate('contact')">Start a Project →</button>
+      <a href="https://wa.me/2349162570520?text=Hello%20JAMIUGLOBALTECH,%20I'm%20interested%20in%20your%20design%20services." target="_blank" class="btn-ghost">💬 WhatsApp Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ PAGE: ABOUT ═══════════════════ -->
+<div class="page" id="page-about">
+  <section class="hero-section" style="min-height: 60vh;">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-content">
+      <p class="section-tag">About Us</p>
+      <h1 class="hero-title" style="font-size:clamp(2.5rem,6vw,4.5rem);">The Story Behind<br><span class="accent">JAMIUGLOBALTECH</span></h1>
+      <p class="hero-subtitle">Founded with a vision to bring world-class design to businesses of all sizes, we've grown from a one-person studio to a trusted creative partner.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner fade-in">
+      <div class="about-grid">
+        <div class="about-image-wrap">
+          <div class="about-image">
+            <img src="https://www.image2url.com/r2/default/images/1779199006416-f18b5fbe-ec7a-43b0-af9b-8573888aea37.png" alt="Muhammad Jamiu - Founder">
+            <div class="about-image-overlay"></div>
+          </div>
+          <div class="about-float-card">
+            <div class="num">4+</div>
+            <div class="lbl">Years of Excellence</div>
+          </div>
+        </div>
+        <div class="about-text">
+          <p class="section-tag">Meet the Founder</p>
+          <h2 class="section-heading">Muhammad Jamiu</h2>
+          <p>With over 4 years of dedicated experience in graphic design, Muhammad Jamiu founded JAMIUGLOBALTECH with a singular vision: to democratize premium design and make it accessible to businesses at every stage of growth.</p>
+          <p>His approach combines strategic thinking with artistic excellence, ensuring every design not only looks stunning but serves a clear business purpose.</p>
+          <div class="about-highlights">
+            <div class="about-highlight"><div class="about-highlight-icon">✦</div> Expert in Adobe Creative Suite & modern design tools</div>
+            <div class="about-highlight"><div class="about-highlight-icon">✦</div> Specialized in brand identity systems</div>
+            <div class="about-highlight"><div class="about-highlight-icon">✦</div> 120+ successful projects delivered</div>
+            <div class="about-highlight"><div class="about-highlight-icon">✦</div> 98% client satisfaction rate</div>
+            <div class="about-highlight"><div class="about-highlight-icon">✦</div> Fast turnaround without compromising quality</div>
+          </div>
+          <button class="btn-gold" onclick="openSupport()">Work With Us →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--bg2);">
+    <div class="section-inner fade-in">
+      <p class="section-tag">Our Values</p>
+      <h2 class="section-heading">What Drives Us</h2>
+      <div class="services-grid" style="margin-top:2rem;">
+        <div class="service-card">
+          <div class="service-icon-wrap">💎</div>
+          <h3>Excellence</h3>
+          <p>We never settle. Every pixel, every color choice, every layout is refined until it's perfect.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">🤝</div>
+          <h3>Partnership</h3>
+          <p>We don't just work for you — we work with you. Your vision is our mission.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">⚡</div>
+          <h3>Speed</h3>
+          <p>Fast doesn't mean rushed. We deliver quickly without ever compromising quality.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">🎯</div>
+          <h3>Strategy</h3>
+          <p>Beautiful design without purpose is just art. We design with clear business objectives.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ PAGE: SERVICES ═══════════════════ -->
+<div class="page" id="page-services">
+  <section class="hero-section" style="min-height: 50vh;">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-content">
+      <p class="section-tag">Our Services</p>
+      <h1 class="hero-title" style="font-size:clamp(2.5rem,6vw,4.5rem);">Premium Design<br><span class="accent">Solutions</span></h1>
+      <p class="hero-subtitle">Comprehensive design services tailored to elevate your brand at every touchpoint.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner fade-in">
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon-wrap">🎨</div>
+          <h3>Brand Identity Design</h3>
+          <p>Complete brand systems: logo design, color systems, typography selection, brand guidelines, stationery design, and brand strategy documentation.</p>
+          <a href="#" class="service-link" onclick="navigate('pricing')">View pricing →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">📄</div>
+          <h3>Print & Marketing</h3>
+          <p>Flyers, posters, business cards, brochures, banners, roll-up stands, event materials, and all print-ready collateral.</p>
+          <a href="#" class="service-link" onclick="navigate('pricing')">View pricing →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">📱</div>
+          <h3>Social Media Design</h3>
+          <p>Feed posts, story templates, highlight covers, ad creatives, carousel designs, and complete social media brand kits.</p>
+          <a href="#" class="service-link" onclick="navigate('pricing')">View pricing →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">📦</div>
+          <h3>Packaging & Merchandise</h3>
+          <p>Product packaging, labels, tags, apparel graphics, tote bags, mugs, and custom merchandise design.</p>
+          <a href="#" class="service-link" onclick="navigate('pricing')">View pricing →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">🖼️</div>
+          <h3>Digital Graphics</h3>
+          <p>Website banners, email headers, digital ads, YouTube thumbnails, podcast covers, and presentation decks.</p>
+          <a href="#" class="service-link" onclick="navigate('pricing')">View pricing →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap">🏪</div>
+          <h3>Environmental Design</h3>
+          <p>Signage, storefront graphics, office branding, exhibition displays, and wayfinding systems.</p>
+          <a href="#" class="service-link" onclick="navigate('pricing')">View pricing →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--bg2);">
+    <div class="section-inner fade-in">
+      <p class="section-tag">Our Process</p>
+      <h2 class="section-heading">From Brief to Brilliance</h2>
+      <div class="process-grid" style="margin-top:2rem;">
+        <div class="process-step">
+          <div class="process-num">01</div>
+          <h4>Brief & Discovery</h4>
+          <p>We listen to understand your vision, goals, audience, and market position.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">02</div>
+          <h4>Research & Strategy</h4>
+          <p>Competitive analysis, mood boards, and creative direction development.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">03</div>
+          <h4>Concept & Design</h4>
+          <p>Multiple concepts presented, refined based on your feedback.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">04</div>
+          <h4>Refinement</h4>
+          <p>Detailed revisions to perfect every element of the design.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">05</div>
+          <h4>Delivery</h4>
+          <p>All files in required formats, print-ready and web-optimized.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">06</div>
+          <h4>Support</h4>
+          <p>Ongoing support and minor adjustments post-delivery.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <h2>Need a Custom <span style="color:var(--accent)">Solution?</span></h2>
+    <p>Every project is unique. Let's discuss your specific needs and create a tailored package.</p>
+    <button class="btn-gold" onclick="navigate('contact')">Get a Custom Quote →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ PAGE: PORTFOLIO ═══════════════════ -->
+<div class="page" id="page-portfolio">
+  <section class="hero-section" style="min-height: 50vh;">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-content">
+      <p class="section-tag">Our Work</p>
+      <h1 class="hero-title" style="font-size:clamp(2.5rem,6vw,4.5rem);">Selected<br><span class="accent">Projects</span></h1>
+      <p class="hero-subtitle">A curated selection of our finest work across brand identity, print, digital, and packaging design.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner fade-in">
+      <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:2.5rem;">
+        <button class="btn-ghost filter-btn active" data-filter="all" onclick="filterPortfolio('all', this)">All</button>
+        <button class="btn-ghost filter-btn" data-filter="branding" onclick="filterPortfolio('branding', this)">Branding</button>
+        <button class="btn-ghost filter-btn" data-filter="print" onclick="filterPortfolio('print', this)">Print</button>
+        <button class="btn-ghost filter-btn" data-filter="social" onclick="filterPortfolio('social', this)">Social Media</button>
+        <button class="btn-ghost filter-btn" data-filter="packaging" onclick="filterPortfolio('packaging', this)">Packaging</button>
+      </div>
+      <div class="portfolio-grid" id="portfolioGrid">
+        <div class="portfolio-item" data-category="branding">
+          <img src="https://picsum.photos/seed/brand1/600/450" alt="Brand Identity Project">
+          <div class="portfolio-overlay"><h4>Heaven's Creamy Bites</h4><p>Brand Identity • Logo • Guidelines</p></div>
+        </div>
+        <div class="portfolio-item" data-category="print">
+          <img src="https://picsum.photos/seed/print1/600/450" alt="Print Design">
+          <div class="portfolio-overlay"><h4>Corporate Solutions</h4><p>Flyers • Banners • Business Cards</p></div>
+        </div>
+        <div class="portfolio-item" data-category="social">
+          <img src="https://picsum.photos/seed/social1/600/450" alt="Social Media Design">
+          <div class="portfolio-overlay"><h4>Tolu Kemi Brand</h4><p>Social Media Kit • Templates</p></div>
+        </div>
+        <div class="portfolio-item" data-category="branding">
+          <img src="https://picsum.photos/seed/brand2/600/450" alt="Brand Identity">
+          <div class="portfolio-overlay"><h4>Aurora Tech</h4><p>Complete Rebrand</p></div>
+        </div>
+        <div class="portfolio-item" data-category="packaging">
+          <img src="https://picsum.photos/seed/pack1/600/450" alt="Packaging Design">
+          <div class="portfolio-overlay"><h4>Nature's Best</h4><p>Product Packaging • Labels</p></div>
+        </div>
+        <div class="portfolio-item" data-category="social">
+          <img src="https://picsum.photos/seed/social2/600/450" alt="Social Media">
+          <div class="portfolio-overlay"><h4>Skyline Corp</h4><p>Ad Creatives • Campaign Design</p></div>
+        </div>
+        <div class="portfolio-item" data-category="print">
+          <img src="https://picsum.photos/seed/print2/600/450" alt="Print Marketing">
+          <div class="portfolio-overlay"><h4>Event Masters</h4><p>Event Materials • Invitations</p></div>
+        </div>
+        <div class="portfolio-item" data-category="packaging">
+          <img src="https://picsum.photos/seed/pack2/600/450" alt="Product Design">
+          <div class="portfolio-overlay"><h4>Urban Eats</h4><p>Menu Design • Packaging</p></div>
+        </div>
+        <div class="portfolio-item" data-category="branding">
+          <img src="https://picsum.photos/seed/brand3/600/450" alt="Logo Design">
+          <div class="portfolio-overlay"><h4>Nexus Digital</h4><p>Logo • Stationery • Brand Book</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <h2>Like What You <span style="color:var(--accent)">See?</span></h2>
+    <p>Let's create something amazing for your brand too.</p>
+    <button class="btn-gold" onclick="navigate('contact')">Start Your Project →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ PAGE: PRICING ═══════════════════ -->
+<div class="page" id="page-pricing">
+  <section class="hero-section" style="min-height: 50vh;">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-content">
+      <p class="section-tag">Pricing</p>
+      <h1 class="hero-title" style="font-size:clamp(2.5rem,6vw,4.5rem);">Transparent<br><span class="accent">Pricing</span></h1>
+      <p class="hero-subtitle">Clear, upfront pricing with no hidden fees. Choose the package that fits your needs.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner fade-in">
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-name">Starter</div>
+          <div class="pricing-price">$150 <span>/ project</span></div>
+          <p class="pricing-desc">Perfect for small businesses needing quick design solutions.</p>
+          <ul class="pricing-features">
+            <li>1 Design Concept</li>
+            <li>2 Revisions</li>
+            <li>Source Files Included</li>
+            <li>3-5 Day Delivery</li>
+            <li>Web-Ready Files</li>
+          </ul>
+          <button class="btn-ghost pricing-btn" onclick="navigate('contact')">Get Started</button>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-name">Professional</div>
+          <div class="pricing-price">$400 <span>/ project</span></div>
+          <p class="pricing-desc">Ideal for growing brands needing comprehensive design work.</p>
+          <ul class="pricing-features">
+            <li>3 Design Concepts</li>
+            <li>5 Revisions</li>
+            <li>All Source Files</li>
+            <li>2-3 Day Delivery</li>
+            <li>Print + Web Files</li>
+            <li>Brand Guidelines</li>
+            <li>Priority Support</li>
+          </ul>
+          <button class="btn-gold pricing-btn" onclick="navigate('contact')">Get Started</button>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-name">Enterprise</div>
+          <div class="pricing-price">$800+ <span>/ project</span></div>
+          <p class="pricing-desc">Complete brand overhaul for established businesses.</p>
+          <ul class="pricing-features">
+            <li>Unlimited Concepts</li>
+            <li>Unlimited Revisions</li>
+            <li>Complete Brand System</li>
+            <li>Rush Delivery Available</li>
+            <li>All File Formats</li>
+            <li>Brand Strategy Session</li>
+            <li>30-Day Support</li>
+            <li>Social Media Kit</li>
+          </ul>
+          <button class="btn-ghost pricing-btn" onclick="navigate('contact')">Contact Us</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--bg2);">
+    <div class="section-inner fade-in" style="text-align:center;">
+      <p class="section-tag">Custom Packages</p>
+      <h2 class="section-heading">Need Something Different?</h2>
+      <p class="section-desc" style="margin-left:auto;margin-right:auto;">We understand every project is unique. Contact us for a custom quote tailored to your specific requirements and budget.</p>
+      <button class="btn-gold" onclick="openSupport()">Request Custom Quote →</button>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ PAGE: CONTACT ═══════════════════ -->
+<div class="page" id="page-contact">
+  <section class="hero-section" style="min-height: 50vh;">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-content">
+      <p class="section-tag">Contact</p>
+      <h1 class="hero-title" style="font-size:clamp(2.5rem,6vw,4.5rem);">Let's Create<br><span class="accent">Together</span></h1>
+      <p class="hero-subtitle">Ready to transform your brand? Reach out and let's discuss your project. We respond within 30 minutes.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner fade-in">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div>
+            <p class="section-tag">Get in Touch</p>
+            <h2 class="section-heading">We'd Love to Hear From You</h2>
+            <p class="section-desc">Whether you have a project in mind or just want to explore possibilities, we're here to help.</p>
+          </div>
+          <a href="mailto:jamiuglobaltech@gmail.com" class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div><h4>Email Us</h4><p>jamiuglobaltech@gmail.com</p></div>
+          </a>
+          <a href="tel:+2349162570520" class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div><h4>Call Us</h4><p>+234 916 257 0520</p></div>
+          </a>
+          <a href="https://wa.me/2349162570520" target="_blank" class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div><h4>WhatsApp</h4><p>Chat with us instantly</p></div>
+          </a>
+          <div class="contact-item">
+            <div class="contact-icon">⏰</div>
+            <div><h4>Response Time</h4><p>Within 30 minutes, 7 days a week</p></div>
+          </div>
+        </div>
+        <div class="contact-form-wrap">
+          <h3 style="margin-bottom:0.5rem;">Send a Message</h3>
+          <p style="color:var(--muted);font-size:0.85rem;margin-bottom:2rem;">Fill out the form below and we'll get back to you shortly.</p>
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" class="form-input" id="c-name" placeholder="Your name">
+                <div class="error-msg" id="nameError">Name is required</div>
+              </div>
+              <div class="form-group">
+                <label>Email *</label>
+                <input type="email" class="form-input" id="c-email" placeholder="you@email.com">
+                <div class="error-msg" id="emailError">Valid email required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Service Needed</label>
+              <select class="form-select" id="c-service">
+                <option value="">Select a service</option>
+                <option>Brand Identity</option>
+                <option>Print & Marketing</option>
+                <option>Social Media Design</option>
+                <option>Packaging Design</option>
+                <option>Digital Graphics</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Budget Range</label>
+              <select class="form-select" id="c-budget">
+                <option value="">Select budget range</option>
+                <option>Under $150</option>
+                <option>$150 - $400</option>
+                <option>$400 - $800</option>
+                <option>$800+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message *</label>
+              <textarea class="form-textarea" id="c-message" rows="4" placeholder="Tell us about your project..."></textarea>
+              <div class="error-msg" id="messageError">Message is required</div>
+            </div>
+            <button type="submit" class="btn-gold" style="width:100%;justify-content:center;">Send Message →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">JAMIUGLOBALTECH</div>
+      <p class="footer-desc">Premium graphic design studio crafting world-class brand identities and visual experiences for ambitious businesses.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Pages</div>
+      <ul class="footer-links">
+        <li><a href="#" onclick="navigate('home')">Home</a></li>
+        <li><a href="#" onclick="navigate('about')">About</a></li>
+        <li><a href="#" onclick="navigate('services')">Services</a></li>
+        <li><a href="#" onclick="navigate('portfolio')">Portfolio</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Services</div>
+      <ul class="footer-links">
+        <li><a href="#" onclick="navigate('services')">Brand Identity</a></li>
+        <li><a href="#" onclick="navigate('services')">Print Design</a></li>
+        <li><a href="#" onclick="navigate('services')">Social Media</a></li>
+        <li><a href="#" onclick="navigate('services')">Packaging</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Connect</div>
+      <ul class="footer-links">
+        <li><a href="mailto:jamiuglobaltech@gmail.com">Email</a></li>
+        <li><a href="tel:+2349162570520">Phone</a></li>
+        <li><a href="https://wa.me/2349162570520" target="_blank">WhatsApp</a></li>
+        <li><a href="#" onclick="navigate('contact')">Contact Form</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 JAMIUGLOBALTECH. All rights reserved.</span>
+    <span>Built with 🤍 by Akanji Mus'ab</span>
+  </div>
+</footer>
+
+<!-- FLOATING CHAT -->
+<button style="position:fixed;bottom:2rem;right:2rem;width:52px;height:52px;border-radius:50%;background:var(--accent-grad);border:none;cursor:pointer;box-shadow:0 8px 30px rgba(200,169,97,0.3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;z-index:100;transition:var(--transition);" onclick="openSupport()" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">💬</button>
+
+<script>
+  // ── PRELOADER ──
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('preloader').classList.add('hidden');
+    }, 1200);
+  });
+
+  // ── NAVIGATION (SPA) ──
+  function navigate(page) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => {
+      p.classList.remove('active');
+    });
+    // Show target page
+    const target = document.getElementById('page-' + page);
+    if (target) {
+      target.classList.add('active');
+    }
+    // Update nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+      if (link.dataset.page === page) link.classList.add('active');
+    });
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Trigger fade-in animations
+    setTimeout(() => {
+      observeFadeIns();
+    }, 100);
+    return false;
+  }
+
+  // ── NAVBAR SCROLL ──
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // ── THEME TOGGLE ──
+  function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.dataset.theme;
+    html.dataset.theme = current === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', html.dataset.theme);
+  }
+  // Load saved theme
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+
+  // ── MOBILE MENU ──
+  function openMobileMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // ── SUPPORT POPUP ──
+  function openSupport() {
+    document.getElementById('supportOverlay').classList.add('open');
+  }
+  function closeSupport() {
+    document.getElementById('supportOverlay').classList.remove('open');
+  }
+  document.getElementById('supportOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeSupport();
+  });
+
+  // ── TOAST ──
+  function showToast(msg, isError = false) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = 'toast' + (isError ? ' error' : '') + ' show';
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+
+  // ── PORTFOLIO FILTER ──
+  function filterPortfolio(category, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    const items = document.querySelectorAll('.portfolio-item');
+    items.forEach(item => {
+      if (category === 'all' || item.dataset.category === category) {
+        item.style.display = 'block';
+        item.style.animation = 'popUp 0.3s ease forwards';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  // ── FADE-IN ON SCROLL ──
+  function observeFadeIns() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
         }
-        function toggleTheme() {
-            const html = document.documentElement;
-            const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-        }
-        function toggleMenu() {
-            document.getElementById('mobileMenu').classList.toggle('open');
-            document.getElementById('menuOverlay').classList.toggle('hidden');
-        }
-        const fadeObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-        document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
-        document.querySelectorAll('.counter').forEach(el => {
-            new IntersectionObserver(([entry], obs) => {
-                if (entry.isIntersecting) {
-                    const target = +el.dataset.target;
-                    let current = 0;
-                    const step = target / (2000 / 16);
-                    const update = () => {
-                        current += step;
-                        if (current < target) { el.textContent = Math.floor(current) + '+'; requestAnimationFrame(update); }
-                        else el.textContent = target + '+';
-                    };
-                    update();
-                    obs.unobserve(el);
-                }
-            }, { threshold: 0.5 }).observe(el);
-        });
-        function filterPortfolio(cat, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => { b.style.background = 'var(--bg-tertiary)'; b.style.color = 'var(--text-secondary)'; b.style.border = '1px solid var(--border-color)'; });
-            btn.style.background = 'var(--accent)'; btn.style.color = '#fff'; btn.style.border = 'none';
-            document.querySelectorAll('.portfolio-item').forEach(item => {
-                if (cat === 'all' || item.dataset.category === cat) { item.style.display = 'block'; setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'none'; }, 50); }
-                else { item.style.opacity = '0'; item.style.transform = 'translateY(20px)'; setTimeout(() => { item.style.display = 'none'; }, 400); }
-            });
-        }
-        function handleSubmit(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const btnText = document.getElementById('btnText');
-            const success = document.getElementById('formSuccess');
-            btnText.textContent = 'Sending...'; btn.disabled = true;
-            setTimeout(() => {
-                btnText.textContent = '✓ Sent!'; btn.style.background = '#22c55e'; success.classList.remove('hidden');
-                setTimeout(() => { btnText.textContent = 'Send Message'; btn.style.background = ''; btn.disabled = false; e.target.reset(); success.classList.add('hidden'); }, 3000);
-            }, 1500);
-        }
-        window.addEventListener('scroll', () => {
-            const btn = document.getElementById('scrollToTop');
-            btn.classList.toggle('show', window.scrollY > 300);
-        });
-    </script>
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
+      observer.observe(el);
+    });
+  }
+  observeFadeIns();
+
+  // ── CONTACT FORM ──
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('c-name');
+      const email = document.getElementById('c-email');
+      const message = document.getElementById('c-message');
+      let valid = true;
+
+      [name, email, message].forEach(el => el.classList.remove('error'));
+      document.querySelectorAll('.error-msg').forEach(el => el.classList.remove('show'));
+
+      if (!name.value.trim()) { name.classList.add('error'); document.getElementById('nameError').classList.add('show'); valid = false; }
+      if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { email.classList.add('error'); document.getElementById('emailError').classList.add('show'); valid = false; }
+      if (!message.value.trim()) { message.classList.add('error'); document.getElementById('messageError').classList.add('show'); valid = false; }
+
+      if (!valid) return showToast('Please fill all required fields correctly', true);
+
+      // Simulate sending
+      showToast('✓ Message sent successfully! We\'ll respond within 30 minutes.');
+      this.reset();
+    });
+  }
+
+  // ── KEYBOARD SHORTCUTS ──
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeSupport();
+      closeMobileMenu();
+    }
+  });
+</script>
 </body>
 </html>
+
